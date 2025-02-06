@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.app.moviedb.movies.compose.MoviesScreen
+import com.app.moviedb.profile.compose.ProfileScreen
 import com.app.moviedb.series.compose.SeriesScreen
 
 @Composable
