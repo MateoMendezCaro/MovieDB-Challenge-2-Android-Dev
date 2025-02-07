@@ -6,8 +6,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,8 +17,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -39,14 +44,22 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.app.moviedb.R
 import com.app.moviedb.profile.viewmodel.ProfileViewModel
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.Person
+
 
 @Composable
 fun ProfileScreen(
     innerPadding: androidx.compose.foundation.layout.PaddingValues,
     viewModel: ProfileViewModel = hiltViewModel()
-) {
+)
+{
     val profile by viewModel.profile
-    val showDialog = remember { mutableStateOf(false) } // Controla el modal
+    val showDialog = remember { mutableStateOf(false) }
     val newName = remember { mutableStateOf(profile?.userName ?: "") }
     val profileImageUri = remember { mutableStateOf(profile?.profileImagePath ?: "") }
 
@@ -78,7 +91,7 @@ fun ProfileScreen(
             ) {
                 Box(
                     modifier = Modifier
-                        .size(140.dp)
+                        .size(180.dp)
                         .clip(CircleShape)
                         .clickable { launcher.launch("image/*") },
                     contentAlignment = Alignment.Center
@@ -106,7 +119,7 @@ fun ProfileScreen(
                     text = profile?.userName ?: "Enter your name",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = if (profile?.userName.isNullOrEmpty()) Color.Gray else MaterialTheme.colorScheme.onSurface,
+                    color = if (profile?.userName.isNullOrEmpty()) MaterialTheme.colorScheme.outline else MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.clickable { showDialog.value = true }
                 )
             }
@@ -137,6 +150,70 @@ fun ProfileScreen(
                     }
                 }
             )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            val buttons = listOf(
+                Pair("Editar", Icons.Default.Edit),
+                Pair("Configuración", Icons.Default.Settings),
+                Pair("Notificaciones", Icons.Default.Notifications),
+                Pair("Cerrar sesión", Icons.Default.ExitToApp)
+            )
+            buttons.forEach { (text, icon) ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(0.75f)
+                        .padding(vertical = 4.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(MaterialTheme.colorScheme.primaryContainer)
+                        .clickable { },
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = text,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier.padding(8.dp)
+                    )
+                    Text(
+                        text = text,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
+                Divider(
+                    modifier = Modifier.fillMaxWidth(0.75f),
+                    color = MaterialTheme.colorScheme.outlineVariant,
+                    thickness = 1.dp
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            val socialIcons = listOf(
+                Icons.Default.Person,
+                Icons.Default.Person,
+                Icons.Default.Person
+            )
+            socialIcons.forEach { icon ->
+                IconButton(onClick = { }) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = "Social Media",
+                        tint = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
         }
     }
 }
