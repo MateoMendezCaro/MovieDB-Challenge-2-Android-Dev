@@ -1,5 +1,6 @@
 package com.app.moviedb.movies.compose
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,6 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
+import com.app.moviedb.base.navigation.Destination
 import com.app.ui_common.components.theme.AppTheme
 import com.app.moviedb.movies.model.MovieUI
 import com.app.moviedb.movies.model.MovieUIState
@@ -27,13 +30,14 @@ import kotlinx.collections.immutable.persistentListOf
 fun MoviesScreen(
     innerPadding: PaddingValues,
     viewModel: MovieViewModel = hiltViewModel(),
+    navController: NavHostController
 ) {
     val stateUI by viewModel.state.collectAsStateWithLifecycle()
     when (val state = stateUI) {
         is MovieUIState.Loading -> GeneralLoadingScreen()
         is MovieUIState.Empty -> GeneralEmptyScreen()
         is MovieUIState.Show -> {
-            Movies(innerPadding, state.movies)
+            Movies(innerPadding, state.movies, navController)
         }
     }
 }
@@ -42,6 +46,7 @@ fun MoviesScreen(
 fun Movies(
     innerPadding: PaddingValues,
     movies: ImmutableList<MovieUI>,
+    navController: NavHostController
 ) {
     Box(
         Modifier
@@ -55,23 +60,12 @@ fun Movies(
         ) {
             items(movies.size) { index ->
                 with(movies[index]) {
-                    MediaCard(imageUrl = imageUrl, title = title)
+                    MediaCard(imageUrl = imageUrl, title = title, isForAdult = isForAdult, onMediaCardClick = { clickedId ->
+                        Log.d("MediaCard", "Card clicked, id: $clickedId")
+                        navController.navigate(Destination.DetailScreen(clickedId, "movie"))
+                    })
                 }
             }
         }
-    }
-}
-
-@Composable
-@Preview(showBackground = true)
-fun PreviewMovies() {
-    AppTheme {
-        Movies(
-            PaddingValues(),
-            persistentListOf(
-                MovieUI("1", "The Shawshank Redemption", "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"),
-                MovieUI("3", "The Dark Knight", "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg")
-            )
-        )
     }
 }

@@ -18,7 +18,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app.moviedb.base.main.compose.ViewEventHost
 import com.app.ui_common.components.theme.AppTheme
-import com.app.moviedb.movies.model.MovieUI
 import com.app.moviedb.series.model.SeriesUI
 import com.app.moviedb.series.model.SeriesUIState
 import com.app.moviedb.series.viewmodel.SeriesViewModel
@@ -66,9 +65,15 @@ fun Series(
         ) {
             items(series.size) { index ->
                 with(series[index]) {
-                    MediaCard(imageUrl = imageUrl, title = title, popularity = voteAverage.toString(), onMediaCardClick = {
-                        Toast.makeText(context, "Item with Id $it clicked", Toast.LENGTH_SHORT).show()
-                    })
+                    MediaCard(
+                        imageUrl = imageUrl,
+                        title = title,
+                        popularity = voteAverage.toString(),
+                        onMediaCardClick = {
+                            Toast.makeText(context, "Item with Id $it clicked", Toast.LENGTH_SHORT).show()
+                        },
+                        isForAdult = isForAdult
+                    )
                 }
             }
         }
@@ -82,8 +87,20 @@ fun PreviewSeries() {
         Series(
             PaddingValues(),
             persistentListOf(
-                SeriesUI("1", "The Shawshank Redemption", "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", 2.0),
-                SeriesUI("3", "The Dark Knight", "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", 3.9)
+                SeriesUI(
+                    "1",
+                    "The Shawshank Redemption",
+                    "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+                    2.0,
+                    isForAdult = true
+                ),
+                SeriesUI(
+                    "3",
+                    "The Dark Knight",
+                    "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+                    3.9,
+                    isForAdult = false
+                )
             )
         )
     }

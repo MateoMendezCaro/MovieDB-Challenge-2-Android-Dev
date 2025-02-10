@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -45,7 +46,7 @@ import coil.compose.rememberImagePainter
 import com.app.moviedb.R
 import com.app.moviedb.profile.viewmodel.ProfileViewModel
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.ExitToApp
@@ -56,8 +57,7 @@ import androidx.compose.material.icons.filled.Person
 fun ProfileScreen(
     innerPadding: androidx.compose.foundation.layout.PaddingValues,
     viewModel: ProfileViewModel = hiltViewModel()
-)
-{
+) {
     val profile by viewModel.profile
     val showDialog = remember { mutableStateOf(false) }
     val newName = remember { mutableStateOf(profile?.userName ?: "") }
@@ -80,10 +80,10 @@ fun ProfileScreen(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(280.dp)
+                .height(230.dp)
                 .background(MaterialTheme.colorScheme.surfaceVariant)
-                .shadow(6.dp)
-                .padding(vertical = 18.dp),
+                .shadow(4.dp)
+                .padding(vertical = 10.dp),
             contentAlignment = Alignment.Center
         ) {
             Column(
@@ -91,7 +91,7 @@ fun ProfileScreen(
             ) {
                 Box(
                     modifier = Modifier
-                        .size(180.dp)
+                        .size(140.dp)
                         .clip(CircleShape)
                         .clickable { launcher.launch("image/*") },
                     contentAlignment = Alignment.Center
@@ -152,49 +152,61 @@ fun ProfileScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(4.dp))
+
+        val buttons = listOf(
+            Pair("Guardados", Icons.Default.Favorite),
+            Pair("Configuración", Icons.Default.Settings),
+            Pair("Notificaciones", Icons.Default.Notifications),
+            Pair("Cerrar sesión", Icons.Default.ExitToApp)
+        )
 
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(14.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val buttons = listOf(
-                Pair("Editar", Icons.Default.Edit),
-                Pair("Configuración", Icons.Default.Settings),
-                Pair("Notificaciones", Icons.Default.Notifications),
-                Pair("Cerrar sesión", Icons.Default.ExitToApp)
-            )
-            buttons.forEach { (text, icon) ->
+            for (rowItems in buttons.chunked(2)) {
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth(0.75f)
-                        .padding(vertical = 4.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(MaterialTheme.colorScheme.primaryContainer)
-                        .clickable { },
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = text,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                        modifier = Modifier.padding(8.dp)
-                    )
-                    Text(
-                        text = text,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        modifier = Modifier.padding(8.dp)
-                    )
+                    rowItems.forEach { (text, icon) ->
+                        Card(
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier
+                                .weight(0.8f)
+                                .aspectRatio(1f)
+                                .padding(8.dp)
+                                .clickable {},
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(16.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Icon(
+                                    imageVector = icon,
+                                    contentDescription = text,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(32.dp)
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    text = text,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+                        }
+                    }
                 }
-                Divider(
-                    modifier = Modifier.fillMaxWidth(0.75f),
-                    color = MaterialTheme.colorScheme.outlineVariant,
-                    thickness = 1.dp
-                )
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),

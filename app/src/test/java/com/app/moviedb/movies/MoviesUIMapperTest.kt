@@ -22,8 +22,18 @@ class MoviesUIMapperTest {
 
         val expectedUIState = MovieUIState.Show(
             listOf(
-                MovieUI(id = "1", title = "Película 1", imageUrl = "/poster1"),
-                MovieUI(id = "2", title = "Película 2", imageUrl = "/poster2")
+                MovieUI(
+                    id = "1",
+                    title = "Película 1",
+                    imageUrl = "/poster1",
+                    isForAdult = false
+                ),
+                MovieUI(
+                    id = "2",
+                    title = "Película 2",
+                    imageUrl = "/poster2",
+                    isForAdult = false
+                )
             ).toPersistentList()
         )
 
@@ -49,7 +59,12 @@ class MoviesUIMapperTest {
 
         val expectedUIState = MovieUIState.Show(
             listOf(
-                MovieUI(id = "", title = "Película sin ID", imageUrl = "/poster")
+                MovieUI(
+                    id = "",
+                    title = "Película sin ID",
+                    imageUrl = "/poster",
+                    isForAdult = false
+                )
             ).toPersistentList()
         )
 

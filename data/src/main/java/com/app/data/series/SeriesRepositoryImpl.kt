@@ -37,6 +37,9 @@ class SeriesRepositoryImpl @Inject constructor(
     override suspend fun fetchAll(): List<SeriesPojo> {
         return remoteSource.getAllSeries()
     }
-
+    override suspend fun getSeriesById(id: String): Series {
+        val seriesPojo = remoteSource.getSeriesById(id)
+        return domainMapper.mapFromPojo(seriesPojo)
+    }
 }
 

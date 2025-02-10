@@ -14,12 +14,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavHostController
 import com.app.moviedb.movies.compose.MoviesScreen
 import com.app.moviedb.profile.compose.ProfileScreen
 import com.app.moviedb.series.compose.SeriesScreen
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     var selectedItem by remember { mutableStateOf(0) }
     val items = listOf("Movies", "Series", "Profile")
     Scaffold(
@@ -42,14 +43,14 @@ fun HomeScreen() {
             }
         }
     ) { innerPadding ->
-        Navigation(selectedItem, innerPadding)
+        Navigation(selectedItem, innerPadding, navController)
     }
 }
 
 @Composable
-fun Navigation(selectedItem: Int, innerPadding: androidx.compose.foundation.layout.PaddingValues) {
+fun Navigation(selectedItem: Int, innerPadding: androidx.compose.foundation.layout.PaddingValues, navController: NavHostController) {
     when (selectedItem) {
-        0 -> MoviesScreen(innerPadding)
+        0 -> MoviesScreen(innerPadding,navController = navController)
         1 -> SeriesScreen(innerPadding)
         2 -> ProfileScreen(innerPadding)
     }

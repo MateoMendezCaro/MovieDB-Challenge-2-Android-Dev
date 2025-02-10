@@ -46,6 +46,8 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":ui-common"))
+    implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.ui.test.android)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

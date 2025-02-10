@@ -5,4 +5,5 @@ data class SeriesUI(
     val title: String,
     val imageUrl: String,
     val voteAverage: Double,
+    val isForAdult: Boolean,
 )

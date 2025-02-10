@@ -37,4 +37,10 @@ class MovieRepositoryImpl @Inject constructor(
     override suspend fun fetchAll(): List<MoviePojo> {
         return remoteSource.getAllMovies()
     }
+
+    override suspend fun getMovieById(id: String): Movie {
+        val moviePojo = remoteSource.getMovieById(id)
+        return domainMapper.mapFromPojo(moviePojo)
+    }
+
 }
