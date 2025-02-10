@@ -5,8 +5,9 @@ import com.app.domain.series.model.Series
 import com.app.moviedb.details.model.DetailUI
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class DetailUIMapper {
+class DetailUIMapper @Inject constructor()  {
     fun mapFromMovie(movieFlow: Flow<Movie?>): Flow<DetailUI?> {
         return movieFlow.map { movie ->
             movie?.let {

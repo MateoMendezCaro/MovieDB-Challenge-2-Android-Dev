@@ -14,7 +14,7 @@ class SeriesViewModel @Inject constructor(
 ) : BaseViewModel<SeriesUIState>(SeriesUIState.Loading) {
 
 
-    fun loadMovies() = launchWithErrorHandlingDefault {
+    fun loadSeries() = launchWithErrorHandlingDefault {
         getAllSeriesUC.invoke().collect {
             _state.value = movieUIMapper.buildUI(it)
         }

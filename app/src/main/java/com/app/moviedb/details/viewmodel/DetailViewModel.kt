@@ -11,13 +11,15 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailViewModel(
+@HiltViewModel
+class DetailViewModel @Inject constructor(
     private val getMovieByIdUC: GetMovieByIdUC,
     private val getSeriesByIdUC: GetSeriesByIdUC,
     private val detailUIMapper: DetailUIMapper
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow<DetailUIState>(DetailUIState.Loading)
     val uiState: StateFlow<DetailUIState> = _uiState
 

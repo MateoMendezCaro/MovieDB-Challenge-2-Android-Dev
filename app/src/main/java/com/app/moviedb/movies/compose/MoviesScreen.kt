@@ -60,8 +60,7 @@ fun Movies(
         ) {
             items(movies.size) { index ->
                 with(movies[index]) {
-                    MediaCard(imageUrl = imageUrl, title = title, isForAdult = isForAdult, onMediaCardClick = { clickedId ->
-                        Log.d("MediaCard", "Card clicked, id: $clickedId")
+                    MediaCard(id = id,imageUrl = imageUrl, title = title, isForAdult = isForAdult, onMediaCardClick = { clickedId ->
                         navController.navigate(Destination.DetailScreen(clickedId, "movie"))
                     })
                 }

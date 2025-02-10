@@ -40,7 +40,6 @@ fun MediaCard(
             .aspectRatio(0.7f)
             .clickable {
                 id?.let {
-                    print("asdsadsada")
                     Log.d("MediaCard", "Card clicked with id: $id")
                     onMediaCardClick.invoke(id)
                 }
@@ -52,27 +51,13 @@ fun MediaCard(
                 contentDescription = title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
-                    .clickable {
-                        id?.let {
-                            print("asdsadsada")
-                            Log.d("MediaCard", "Card clicked with id: $id")
-                            onMediaCardClick.invoke(id)
-                        }
-                    }
             )
 
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
+                modifier = Modifier.fillMaxSize()
                     .background(Color.Black.copy(alpha = 0.5f))
-                    .clickable {
-                        id?.let {
-                            print("asdsadsada")
-                            Log.d("MediaCard", "Card clicked with id: $id")
-                            onMediaCardClick.invoke(id)
-                        }
-                    }
             )
+
             Text(
                 text = title,
                 style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
@@ -80,6 +65,7 @@ fun MediaCard(
                     .align(Alignment.BottomStart)
                     .padding(8.dp)
             )
+
             popularity?.let {
                 Text(
                     text = "Rate $popularity",
@@ -89,19 +75,13 @@ fun MediaCard(
                         .padding(8.dp)
                 )
             }
+
             if (!isForAdult) {
                 Box(
                     modifier = Modifier
                         .align(Alignment.TopStart)
                         .background(Color.Red, shape = RoundedCornerShape(bottomEnd = 8.dp))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
-                        .clickable {
-                            id?.let {
-                                print("asdsadsada")
-                                Log.d("MediaCard", "Card clicked with id: $id")
-                                onMediaCardClick.invoke(id)
-                            }
-                        }
                 ) {
                     Text(
                         text = "+18",

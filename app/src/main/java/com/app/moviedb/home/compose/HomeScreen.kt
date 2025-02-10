@@ -51,7 +51,7 @@ fun HomeScreen(navController: NavHostController) {
 fun Navigation(selectedItem: Int, innerPadding: androidx.compose.foundation.layout.PaddingValues, navController: NavHostController) {
     when (selectedItem) {
         0 -> MoviesScreen(innerPadding,navController = navController)
-        1 -> SeriesScreen(innerPadding)
+        1 -> SeriesScreen(innerPadding,navController = navController)
         2 -> ProfileScreen(innerPadding)
     }
 }

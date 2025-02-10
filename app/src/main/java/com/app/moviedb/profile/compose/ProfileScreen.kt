@@ -155,10 +155,10 @@ fun ProfileScreen(
         Spacer(modifier = Modifier.height(4.dp))
 
         val buttons = listOf(
-            Pair("Guardados", Icons.Default.Favorite),
-            Pair("Configuración", Icons.Default.Settings),
-            Pair("Notificaciones", Icons.Default.Notifications),
-            Pair("Cerrar sesión", Icons.Default.ExitToApp)
+            Pair("Saved", Icons.Default.Favorite),
+            Pair("settings", Icons.Default.Settings),
+            Pair("Notifications", Icons.Default.Notifications),
+            Pair("Log Out", Icons.Default.ExitToApp)
         )
 
         Column(
