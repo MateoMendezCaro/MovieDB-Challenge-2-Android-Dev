@@ -46,5 +46,6 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.coil)
+    implementation(project(":domain"))
     debugImplementation(libs.androidx.ui.tooling)
 }

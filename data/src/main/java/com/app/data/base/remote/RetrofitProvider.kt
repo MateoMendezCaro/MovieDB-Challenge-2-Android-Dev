@@ -8,7 +8,7 @@ class RetrofitProvider {
 
     val provideRetrofit: Retrofit by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         val client = OkHttpClient.Builder()
-            .addInterceptor(AuthInterceptor("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZTZjZjk2ZGI5M2E4ODY4NmQ1ZTUzOGNhYmEyNDc3YiIsIm5iZiI6MTcyNTE1OTU3Ny45Njg4NzEsInN1YiI6IjViYWVhMjMwMGUwYTI2MWUyODAwYjM4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3gk1pTiT_8ODFDAHA_L1EZGFI4wFVC0tM05MGBH__C8")) // For API token AUTH since this is static I will use a different way to save this
+            .addInterceptor(AuthInterceptor("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YzQ1ZWVlYWU4Y2JjNDQ2Njg5NzE4MjYzOTFmYjk2ZiIsIm5iZiI6MTcxMzk1ODU0MC4wNjIsInN1YiI6IjY2MjhlZThjZTI5NWI0MDE2NDliYjI3YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.aZhnIk25UTJyIFfMl8it6CTzUS9aLRyD1kaff6cNzhE")) // For API token AUTH since this is static I will use a different way to save this
             .build()
 
         Retrofit.Builder()
