@@ -9,11 +9,9 @@ import javax.inject.Inject
 class GetTrendingPeopleUC @Inject constructor(
     private val peopleRepository: PeopleRepository
 ) {
-
     suspend fun invoke(): Flow<List<People>> {
         return peopleRepository.getAll()
     }
-
     suspend fun refresh() {
         peopleRepository.refresh()
     }

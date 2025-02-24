@@ -31,11 +31,11 @@ class PeopleLocalSourceImpl @Inject constructor(
         }.execute(items)
     }
 
-    override fun createOrUpdate(item: PeopleEntity): PeopleEntity {
-        if (peopleDao.update(item) == 0) {
-            peopleDao.insert(listOf(item))
+    override fun createOrUpdate(items: PeopleEntity): PeopleEntity {
+        if (peopleDao.update(items) == 0) {
+            peopleDao.insert(listOf(items))
         }
-        return item
+        return items
     }
 
     override fun deleteAll(): Int {
