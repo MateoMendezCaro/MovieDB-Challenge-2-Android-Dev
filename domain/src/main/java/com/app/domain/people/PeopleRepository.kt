@@ -5,6 +5,7 @@ import com.app.domain.people.model.People
 import kotlinx.coroutines.flow.Flow
 
 interface PeopleRepository : BaseRepository<People> {
-    suspend fun getAll(): Flow<List<People>>
+    fun getAll(): Flow<List<People>>
+
 }
 

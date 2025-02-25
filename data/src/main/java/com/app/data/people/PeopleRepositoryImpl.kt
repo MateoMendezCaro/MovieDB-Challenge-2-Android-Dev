@@ -25,7 +25,7 @@ class PeopleRepositoryImpl @Inject constructor(
     domainMapper
 ) {
 
-    override suspend fun getAll(): Flow<List<People>> {
+    override fun getAll(): Flow<List<People>> {
         return operationGetAll.asFlow().map { entities ->
             entities.map { domainMapper.mapRemote(it) }
         }.flowOn(Dispatchers.IO)

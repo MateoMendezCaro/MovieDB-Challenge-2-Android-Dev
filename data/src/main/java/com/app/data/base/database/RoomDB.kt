@@ -14,7 +14,7 @@ import com.app.data.series.model.SeriesEntity
         MovieEntity::class,
         SeriesEntity::class,
         PeopleEntity::class
-    ], version = 1, exportSchema = false
+    ], version = 2, exportSchema = false
 )
 abstract class RoomDao : RoomDatabase() {
 
