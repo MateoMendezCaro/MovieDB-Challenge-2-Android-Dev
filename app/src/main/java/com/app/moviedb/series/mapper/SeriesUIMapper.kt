@@ -18,7 +18,8 @@ class SeriesUIMapper @Inject constructor() {
                     id = it.id.orEmpty(),
                     title = it.title,
                     imageUrl = it.posterPath,
-                    voteAverage = it.voteAverage
+                    voteAverage = it.voteAverage,
+                    isForAdult = it.isForAdult
                 )
             }.toPersistentList()
         )

@@ -12,5 +12,7 @@ class MovieRemoteSource @Inject constructor(
     suspend fun getAllMovies(): List<MoviePojo> {
         return api.getAllMovies().results
     }
-
+    suspend fun getMovieById(id: String): MoviePojo {
+        return api.getMovieById(id)
+    }
 }

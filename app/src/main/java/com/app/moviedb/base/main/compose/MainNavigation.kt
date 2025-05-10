@@ -1,12 +1,11 @@
 package com.app.moviedb.base.main.compose
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.app.moviedb.base.navigation.Destination
 import com.app.moviedb.base.navigation.NavHost
-import androidx.navigation.*
 import com.app.moviedb.base.navigation.composable
+import com.app.moviedb.details.compose.DetailScreen
 import com.app.moviedb.home.compose.HomeScreen
 
 @Composable
@@ -16,9 +15,16 @@ fun MainNavigation(navController: NavHostController) {
         startDestination = Destination.HomeScreen
     ) {
         composable(destination = Destination.HomeScreen) {
-            HomeScreen()
+            HomeScreen(navController = navController)
         }
-        composable(destination = Destination.DetailScreen) {
+        composable(destination = Destination.DetailScreen) { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id") ?: ""
+            val type = backStackEntry.arguments?.getString("type") ?: ""
+            DetailScreen(
+                id = id,
+                isMovie = (type == "movie"),
+                navController = navController
+            )
         }
     }
 }

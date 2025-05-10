@@ -29,7 +29,13 @@ class SeriesUIMapperTest {
         val result = mapper.buildUI(seriesList)
         val expected = SeriesUIState.Show(
             persistentListOf(
-                SeriesUI(id = "2", title = "Series 2", imageUrl = "", voteAverage = 6.0)
+                SeriesUI(
+                    id = "2",
+                    title = "Series 2",
+                    imageUrl = "",
+                    voteAverage = 6.0,
+                    isForAdult = it.isForAdult
+                )
             )
         )
         assertEquals(expected, result)
@@ -44,7 +50,19 @@ class SeriesUIMapperTest {
         val result = mapper.buildUI(seriesList)
         val expected = SeriesUIState.Show(
             persistentListOf(
-                SeriesUI(id = "1", title = "Series 1", imageUrl = "/path1", voteAverage = 6.0), SeriesUI(id = "2", title = "Series 2", imageUrl = "/path2", voteAverage = 7.0)
+                SeriesUI(
+                    id = "1",
+                    title = "Series 1",
+                    imageUrl = "/path1",
+                    voteAverage = 6.0,
+                    isForAdult = it.isForAdult
+                ), SeriesUI(
+                    id = "2",
+                    title = "Series 2",
+                    imageUrl = "/path2",
+                    voteAverage = 7.0,
+                    isForAdult = it.isForAdult
+                )
             )
         )
         assertEquals(expected, result)
@@ -58,7 +76,13 @@ class SeriesUIMapperTest {
 
         val expectedUIState = SeriesUIState.Show(
             listOf(
-                SeriesUI(id = "", title = "Serie sin ID", imageUrl = "/poster", voteAverage = 6.5)
+                SeriesUI(
+                    id = "",
+                    title = "Serie sin ID",
+                    imageUrl = "/poster",
+                    voteAverage = 6.5,
+                    isForAdult = it.isForAdult
+                )
             ).toPersistentList()
         )
 

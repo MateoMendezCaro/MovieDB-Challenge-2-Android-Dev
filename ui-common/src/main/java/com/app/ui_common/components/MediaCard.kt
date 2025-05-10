@@ -1,5 +1,6 @@
 package com.app.ui_common.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,7 +30,8 @@ fun MediaCard(
     imageUrl: String,
     title: String,
     popularity: String? = null,
-    onMediaCardClick: (id: String) -> Unit = {}
+    isForAdult: Boolean,
+    onMediaCardClick: (id: String,) -> Unit = {},
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -38,6 +40,7 @@ fun MediaCard(
             .aspectRatio(0.7f)
             .clickable {
                 id?.let {
+                    Log.d("MediaCard", "Card clicked with id: $id")
                     onMediaCardClick.invoke(id)
                 }
             }
@@ -49,11 +52,12 @@ fun MediaCard(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
+
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
+                modifier = Modifier.fillMaxSize()
                     .background(Color.Black.copy(alpha = 0.5f))
             )
+
             Text(
                 text = title,
                 style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
@@ -61,6 +65,7 @@ fun MediaCard(
                     .align(Alignment.BottomStart)
                     .padding(8.dp)
             )
+
             popularity?.let {
                 Text(
                     text = "Rate $popularity",
@@ -70,6 +75,21 @@ fun MediaCard(
                         .padding(8.dp)
                 )
             }
+
+            if (!isForAdult) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                        .background(Color.Red, shape = RoundedCornerShape(bottomEnd = 8.dp))
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                ) {
+                    Text(
+                        text = "+18",
+                        color = Color.White,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
         }
     }
 }
@@ -78,6 +98,12 @@ fun MediaCard(
 @Preview(showBackground = true)
 fun PreviewMovieItem() {
     AppTheme {
-        MediaCard("1", "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", "The Shawshank Redemption", "8.0")
+        MediaCard(
+            "1",
+            "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+            "The Shawshank Redemption",
+            "8.0",
+            isForAdult = true
+        )
     }
 }

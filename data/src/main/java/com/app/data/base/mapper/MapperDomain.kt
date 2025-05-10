@@ -1,5 +1,7 @@
 package com.app.data.base.mapper
 
+import com.app.data.movies.model.MovieEntity
+
 interface MapperDomain<Model, Entity> {
 
     fun mapRemote(entity: Entity): Model

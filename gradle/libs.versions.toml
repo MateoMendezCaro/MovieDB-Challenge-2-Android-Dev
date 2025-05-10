@@ -1,7 +1,7 @@
 [versions]
-agp = "8.5.2"
+agp = "8.8.0"
 androidxJunit = "1.2.1"
-gradle = "8.0.2"
+gradle = "8.8.0"
 kotlin = "1.9.24"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -30,6 +30,8 @@ kotlinCollection = "0.3.5"
 composeConstrain = "1.0.1"
 retrofit = "2.9.0"
 gson = "2.10.1"
+foundationLayoutAndroid = "1.6.0"
+uiTestAndroid = "1.6.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -65,6 +67,8 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
+androidx-ui-test-android = { group = "androidx.compose.ui", name = "ui-test-android", version.ref = "uiTestAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -10,4 +10,7 @@ class SeriesRemoteSource  @Inject constructor(
     suspend fun getAllSeries(): List<SeriesPojo> {
         return api.getAllSeries().results
     }
+    suspend fun getSeriesById(id: String): SeriesPojo {
+        return api.getSeriesById(id)
+    }
 }

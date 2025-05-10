@@ -3,6 +3,7 @@ package com.app.data.base.database
 import android.app.Application
 import androidx.room.Room
 import com.app.data.movies.local.MovieDao
+import com.app.data.people.local.PeopleDao
 import com.app.data.series.local.SeriesDao
 import dagger.Module
 import dagger.Provides
@@ -33,5 +34,9 @@ object DatabaseModule {
     @Provides
     fun provideSeriesDao(database: RoomDao): SeriesDao {
         return database.seriesDao()
+    }
+    @Provides
+    fun providePeopleDao(database: RoomDao): PeopleDao {
+        return database.peopleDao()
     }
 }

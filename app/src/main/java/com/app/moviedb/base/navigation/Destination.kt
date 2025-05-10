@@ -15,9 +15,10 @@ sealed class Destination(protected val route: String, vararg params: String) {
 
     data object HomeScreen : NoArgumentsDestination(HOME_ROUTE)
 
-    data object DetailScreen : Destination(DETAIL_ROUTE, ID) {
-        operator fun invoke(idMovie: String): String = route.appendParams(
-            ID to idMovie
+    data object DetailScreen : Destination(DETAIL_ROUTE, ID, TYPE) {
+        operator fun invoke(id: String, type: String): String = route.appendParams(
+            ID to id,
+            TYPE to type
         )
     }
 
@@ -25,6 +26,7 @@ sealed class Destination(protected val route: String, vararg params: String) {
         private const val HOME_ROUTE = "home"
         private const val DETAIL_ROUTE = "DetailMovie"
         private const val ID = "id"
+        private const val TYPE = "type"
     }
 }
 

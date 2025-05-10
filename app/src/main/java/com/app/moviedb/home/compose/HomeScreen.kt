@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -14,13 +15,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavHostController
 import com.app.moviedb.movies.compose.MoviesScreen
+import com.app.moviedb.people.compose.PeopleScreen
+import com.app.moviedb.profile.compose.ProfileScreen
 import com.app.moviedb.series.compose.SeriesScreen
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     var selectedItem by remember { mutableStateOf(0) }
-    val items = listOf("Movies", "Series", "Profile")
+    val items = listOf("Movies", "Series","People","Profile")
     Scaffold(
         bottomBar = {
             NavigationBar {
@@ -30,7 +34,8 @@ fun HomeScreen() {
                             when (index) {
                                 0 -> Icon(Icons.Filled.Build, contentDescription = item)
                                 1 -> Icon(Icons.Filled.Person, contentDescription = item)
-                                2 -> Icon(Icons.Filled.Call, contentDescription = item)
+                                2 -> Icon(Icons.Filled.Star, contentDescription = item)
+                                3 -> Icon(Icons.Filled.Call, contentDescription = item)
                                 else -> {}
                             }
                         },
@@ -41,15 +46,17 @@ fun HomeScreen() {
             }
         }
     ) { innerPadding ->
-        Navigation(selectedItem, innerPadding)
+        Navigation(selectedItem, innerPadding, navController)
     }
 }
 
 @Composable
-fun Navigation(selectedItem: Int, innerPadding: androidx.compose.foundation.layout.PaddingValues) {
+fun Navigation(selectedItem: Int, innerPadding: androidx.compose.foundation.layout.PaddingValues, navController: NavHostController) {
     when (selectedItem) {
-        0 -> MoviesScreen(innerPadding)
-        1 -> SeriesScreen(innerPadding)
-        2 -> ProfileScreen(innerPadding)
+        0 -> MoviesScreen(innerPadding,navController = navController)
+        1 -> SeriesScreen(innerPadding,navController = navController)
+        2 -> PeopleScreen(innerPadding)
+        3 -> ProfileScreen(innerPadding)
+
     }
 }
